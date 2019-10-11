@@ -28,8 +28,6 @@ app.use('/messages', routes.message);
 
 const eraseDatabaseOnSync = true;
 
-const PORT = 5000;
-
 connectDb().then(async () => {
   if (eraseDatabaseOnSync) {
     await Promise.all([
@@ -40,8 +38,10 @@ connectDb().then(async () => {
     createUsersWithMessages();
   }
 
-  app.listen(PORT, () =>
-    console.log(`App Escuchando en ${PORT}!`),
+let port = process.env.PORT || '5000';
+
+  app.listen(port, () =>
+    console.log(`App Escuchando en ${port}!`),
   );
 });
 
